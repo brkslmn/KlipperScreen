@@ -1,0 +1,11 @@
+tr:
+  english: İngilizce
+  french: Fransızca
+  german: Almanca
+  turkish: Türkçe
+  italian: İtalyanca
+  spanish: İspanyolca
+  languageSettings: Dil Seçimi
+  selectLanguage: Lütfen sistem dilini belirleyiniz
+  continue: Devam
+  mcuArchitecture: MCU Architecture

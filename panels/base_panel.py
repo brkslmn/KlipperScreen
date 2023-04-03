@@ -260,7 +260,22 @@ class BasePanel(ScreenPanel):
             return
         self.control['back'].set_sensitive(False)
         self.control['home'].set_sensitive(False)
-
+    
+    def visible_menu(self, show=True):
+        if show:
+            self.control['back'].set_visible(True)
+            self.control['home'].set_visible(True)
+            self.control['estop'].set_visible(True)
+            self.control['time_box'].set_visible(True)
+            self.titlelbl.set_visible(True)
+            self.action_bar.set_size_request(self._gtk.action_bar_width, self._gtk.action_bar_height)
+            return
+        self.control['back'].set_visible(False)
+        self.control['home'].set_visible(False)
+        self.control['estop'].set_visible(False)
+        self.control['time_box'].set_visible(False)
+        self.titlelbl.set_visible(False)
+        self.action_bar.set_size_request(0,0)
     def show_macro_shortcut(self, show=True):
         if show is True and self.buttons_showing['macros_shortcut'] is False:
             self.action_bar.add(self.control['macros_shortcut'])

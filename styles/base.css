@@ -7,9 +7,144 @@
     border: 0;
 }
 
+
+spinner {
+    
+    animation: spin 1s ease-in-out infinite;
+}
+
+/*General Button*/
+button#flat-button-blue {
+    background-color: #00477B;
+    background: #00477B;
+    font-size:18;
+    border-radius: 5px;
+}
+
+/*Yazıcı Bağlama*/
+button#flat-button-black {
+    background-color: #161616;
+    background: #161616;
+    font-size:30;
+    border-radius: 10px;
+}
+button#flat-button-black:active {
+    background-color: #161616;
+    background: #161616;
+    border: 1px solid #EAEAEA;
+    font-size:30;
+    border-radius: 10px;
+}
+/*Menu*/
+button#menu-button {
+    color: #FFFFFF;
+    font-size: 30px;
+}
+button#menu-button:active {
+    color: #FFFFFF;
+    font-size: 30px;
+    border-radius: 40px 33px 0px 0px;
+    background: #181818;
+}
+/*PopUp*/
+label#info-popup-label {
+    color: #23A6F0;
+    font-size: 20px; 
+}
+/*Home Button*/
+button#flat-icon-button-green {
+    background: #007B65;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 21px;
+}
+button#flat-button-grey {
+    background: #686868;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    color: #070707;
+    font-size: 25px;
+}
+/*Delete Button*/
+button#delete-button {
+    background: #913C3C;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    color: #070707;
+    font-size: 25px;
+}
+/*Extruder*/
+button#stroked-button-black {
+    border: 1px solid #C1C1C1;
+    border-radius: 19px;
+    background: #161616;
+    color: #9A9A9A;
+}
+button#stroked-button-black:active {
+    border-radius: 19px;
+    background: #00477B;
+    color: #FFFFFF;
+}
+/*Extruder*/
+button#flat-button-white {
+    background: #D9D9D9;
+    border: 1px solid #9D9797;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    color: #1A1C1E;
+    font-size: 25px;
+}
+  
+label#language-label {
+    font-size:18;
+    color:#9A9A9A;
+}
+
+label#subtext-label {
+    font-size:50;
+    color:#9A9A9A;
+}
+/*Chip Ayarlari*/
+#selection-box {
+    background: #242424;
+    border-radius: 10px;
+}
+label#selection-box-label {
+    font-size: 30px;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+/*SD Kart Yazma*/
+#info-box {
+    background: #161616;
+    border-radius: 10px;
+}
+label#info-box-label-success {
+    color: #37AB56;
+    font-size: 30px;
+}
+label#info-box-label-waiting {
+    color: #F7BA17;
+    font-size: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
 window {
     background-color: #13181C;
     -gtk-icon-shadow: none;
+}
+
+frame { 
+    border: 1px solid #fff;
+    border-radius: 10px
 }
 
 button {
@@ -128,6 +263,7 @@ entry {
 label {
     color: white;
 }
+
 
 menu {
     background-color: #13181C;

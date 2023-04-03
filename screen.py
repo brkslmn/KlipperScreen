@@ -10,7 +10,7 @@ import traceback  # noqa
 import locale
 import sys
 import gi
-
+import i18n
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
 from importlib import import_module
@@ -103,7 +103,8 @@ class KlipperScreen(Gtk.Window):
         self.version = version
         self.dialogs = []
         self.confirm = None
-
+        i18n.load_path.append('translations')
+        i18n.set('locale', 'en')
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
 
         self._config = KlipperScreenConfig(configfile, self)
@@ -291,6 +292,7 @@ class KlipperScreen(Gtk.Window):
             self.attach_panel(panel_name)
         except Exception as e:
             logging.exception(f"Error attaching panel:\n{e}")
+        
 
     def attach_panel(self, panel_name):
         self.base_panel.add_content(self.panels[panel_name])
@@ -303,6 +305,7 @@ class KlipperScreen(Gtk.Window):
         if hasattr(self.panels[panel_name], "activate"):
             self.panels[panel_name].activate()
         self.show_all()
+        self.base_panel.visible_menu(False)
 
     def show_popup_message(self, message, level=3):
         self.close_screensaver()
@@ -453,8 +456,8 @@ class KlipperScreen(Gtk.Window):
         # Find current menu item
         if "main_panel" in self._cur_panels:
             menu = "__main"
-        elif "splash_screen" in self._cur_panels:
-            menu = "__splashscreen"
+        elif "co_print_splash_screen" in self._cur_panels:
+            menu = "__coprintsplashscreen"
         else:
             menu = "__print"
 
@@ -472,7 +475,7 @@ class KlipperScreen(Gtk.Window):
         for _ in self.base_panel.content.get_children():
             self.base_panel.content.remove(_)
         for panel in list(self.panels):
-            if panel not in ["printer_select", "splash_screen"]:
+            if panel not in ["printer_select", "co_print_splash_screen"]:
                 del self.panels[panel]
         for dialog in self.dialogs:
             self.gtk.remove_dialog(dialog)
@@ -714,7 +717,7 @@ class KlipperScreen(Gtk.Window):
         elif action == "notify_power_changed":
             logging.debug("Power status changed: %s", data)
             self.printer.process_power_update(data)
-            self.panels['splash_screen'].check_power_status()
+            self.panels['co_print_splash_screen'].check_power_status()
         elif action == "notify_gcode_response" and self.printer.state not in ["error", "shutdown"]:
             if not (data.startswith("B:") or data.startswith("T:")):
                 if data.startswith("echo: "):
@@ -780,9 +783,9 @@ class KlipperScreen(Gtk.Window):
 
     def printer_initializing(self, msg, remove=False):
         self.close_popup_message()
-        if 'splash_screen' not in self.panels or remove:
-            self.show_panel('splash_screen', "splash_screen", None, 2)
-        self.panels['splash_screen'].update_text(msg)
+        if 'co_print_splash_screen' not in self.panels or remove:
+            self.show_panel('co_print_splash_screen', "co_print_splash_screen", None, 2)
+        self.panels['co_print_splash_screen'].update_text(msg)
 
     def search_power_devices(self, devices):
         found_devices = []
@@ -1003,6 +1006,7 @@ def main():
         raise RuntimeError from e
     win.connect("destroy", Gtk.main_quit)
     win.show_all()
+    win.base_panel.visible_menu(False)
     Gtk.main()
 
 

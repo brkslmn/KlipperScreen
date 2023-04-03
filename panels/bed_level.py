@@ -159,7 +159,7 @@ class BedLevelPanel(ScreenPanel):
 
         button_scale = 2
 
-        self.buttons['bl'] = self._gtk.Button("bed-level-t-l", scale=button_scale)
+        self.buttons['bl'] = self._gtk.Button("bed-level-t-l", )
         self.buttons['br'] = self._gtk.Button("bed-level-t-r", scale=button_scale)
         self.buttons['fl'] = self._gtk.Button("bed-level-b-l", scale=button_scale)
         self.buttons['fr'] = self._gtk.Button("bed-level-b-r", scale=button_scale)

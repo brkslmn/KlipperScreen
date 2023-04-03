@@ -2,22 +2,24 @@ import logging
 import os
 
 import gi
-
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Pango
+from gi.repository import Gtk, Pango, GLib
 
 from ks_includes.screen_panel import ScreenPanel
 
 
 def create_panel(*args):
-    return SplashScreenPanel(*args)
+    return CoPrintSplashScreenPanel(*args)
 
 
-class SplashScreenPanel(ScreenPanel):
+class CoPrintSplashScreenPanel(ScreenPanel):
 
     def __init__(self, screen, title):
         super().__init__(screen, title)
-        image = self._gtk.Image("coPrint", self._gtk.content_width * .2, self._gtk.content_height * .5)
+        
+        image = self._gtk.Image("coPrint", self._gtk.content_width , self._gtk.content_height * .20)
+        spinner = Gtk.Spinner()
+        spinner.start()
         self.labels['text'] = Gtk.Label(_("Initializing printer..."))
         self.labels['text'].set_line_wrap(True)
         self.labels['text'].set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
@@ -47,30 +49,46 @@ class SplashScreenPanel(ScreenPanel):
         scroll = self._gtk.ScrolledWindow()
         scroll.set_hexpand(True)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        scroll.add(self.labels['text'])
+        scroll.add(spinner)
 
-        info = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
-        info.pack_start(image, False, True, 8)
-        info.pack_end(scroll, True, True, 8)
+        info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        info.pack_start(image, False, True, 100)
+        info.pack_end(scroll, False, False, 20)
 
         main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
-        main.pack_start(info, True, True, 8)
+        main.pack_start(info, True, True, 0)
         main.pack_end(self.labels['actions'], False, False, 0)
-
+        
         self.show_restart_buttons()
-
+        self.start_timer()
         self.content.add(main)
+        
+        
 
     def update_text(self, text):
-        self.labels['text'].set_label(f"{text}")
+        
         self.show_restart_buttons()
 
+    def start_timer(self):
+        """ Start the timer. """
+        self.timeout_id = GLib.timeout_add(500, self.on_timeout, None)
+        
+
+    def on_timeout(self, *args, **kwargs):
+        """ A timeout function.
+        Return True to stop it.
+        This is not a precise timer since next timeout  
+        is recalculated based on the current time.""" 
+        self._screen.show_panel("co_print_language_select_screen", "co_print_language_select_screen", "Language", 1, False)    
+        self.timeout_id = None
+        self.destroy()
+        return False
+    
     def clear_action_bar(self):
         for child in self.labels['actions'].get_children():
             self.labels['actions'].remove(child)
 
     def show_restart_buttons(self):
-
         self.clear_action_bar()
         if self.ks_printer_cfg is not None and self._screen._ws.connected:
             power_devices = self.ks_printer_cfg.get("power_devices", "")
@@ -78,16 +96,7 @@ class SplashScreenPanel(ScreenPanel):
                 logging.info(f"Associated power devices: {power_devices}")
                 self.add_power_button(power_devices)
 
-        if self._screen.initialized:
-            self.labels['actions'].add(self.labels['restart'])
-            self.labels['actions'].add(self.labels['firmware_restart'])
-        else:
-            self.labels['actions'].add(self.labels['restart_system'])
-            self.labels['actions'].add(self.labels['shutdown'])
-        self.labels['actions'].add(self.labels['menu'])
-        if self._screen._ws and not self._screen._ws.connecting or self._screen.reinit_count > self._screen.max_retries:
-            self.labels['actions'].add(self.labels['retry'])
-        self.labels['actions'].show_all()
+      
 
     def add_power_button(self, powerdevs):
         self.labels['power'] = self._gtk.Button("shutdown", _("Power On Printer"), "color3")
@@ -97,6 +106,7 @@ class SplashScreenPanel(ScreenPanel):
 
     def activate(self):
         self.check_power_status()
+        self.start_timer()
         self._screen.base_panel.show_macro_shortcut(False)
         self._screen.base_panel.show_heaters(False)
         self._screen.base_panel.show_estop(False)
