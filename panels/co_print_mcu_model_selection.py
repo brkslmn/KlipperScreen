@@ -1,6 +1,6 @@
 import logging
 import os
-
+from ks_includes.widgets.checkbuttonbox import CheckButtonBox
 import gi
 import i18n
 
@@ -12,23 +12,26 @@ from ks_includes.screen_panel import ScreenPanel
 
 
 def create_panel(*args):
-    return CoPrintSplashScreenPanel(*args)
+    return CoPrintMcuModelSelection(*args)
 
 
-class CoPrintSplashScreenPanel(ScreenPanel):
+class CoPrintMcuModelSelection(ScreenPanel):
 
      
     def __init__(self, screen, title):
         super().__init__(screen, title)
      
-        languages = [
-            {'Lang':'en' ,'Name': i18n.t('translate.english'), 'Icon': 'English', 'Button': Gtk.RadioButton()},
-            {'Lang':'fr' ,'Name': i18n.t('translate.french'), 'Icon': 'France', 'Button': Gtk.RadioButton()},
-            {'Lang':'ge' ,'Name': i18n.t('translate.german'), 'Icon': 'Germany', 'Button': Gtk.RadioButton()},
-            {'Lang':'tr' ,'Name': i18n.t('translate.turkish'), 'Icon': 'Turkey', 'Button': Gtk.RadioButton()},
-            {'Lang':'it' ,'Name': i18n.t('translate.italian'), 'Icon': 'Italy', 'Button': Gtk.RadioButton()},
-            {'Lang':'sp' ,'Name': i18n.t('translate.spanish'), 'Icon': 'Spain', 'Button': Gtk.RadioButton()},
-            
+        chips = [
+            {'Name': "STM32F103",  'Button': Gtk.RadioButton()},
+            {'Name': "STM32F207",  'Button': Gtk.RadioButton()},
+            {'Name': "STM32F401",  'Button': Gtk.RadioButton()},
+            {'Name': "STM32F405", 'Button': Gtk.RadioButton()},
+            {'Name': "STM32F407", 'Button': Gtk.RadioButton()},
+            {'Name': "STM32F429",  'Button': Gtk.RadioButton()},
+            {'Name': "STM32F446", 'Button': Gtk.RadioButton()},
+            {'Name': "STM32F031", 'Button': Gtk.RadioButton()},
+            {'Name': "STM32F042", 'Button': Gtk.RadioButton()},
+            {'Name': "STM32F070", 'Button': Gtk.RadioButton()},
             ]
         
         self.labels['actions'] = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
@@ -39,37 +42,38 @@ class CoPrintSplashScreenPanel(ScreenPanel):
         self.labels['actions'].set_size_request(self._gtk.content_width, -1)
 
        
-        initHeader = InitHeader (self, i18n.t('translate.languageSettings'), i18n.t('translate.selectLanguage'), "Geography")
+        initHeader = InitHeader (self, i18n.t('translate.mcuModelHeader'), i18n.t('translate.mcuModelContent'), "mikrochip")
 
-        '''diller'''
+    
+        '''diller bitis'''
+        
         grid = Gtk.Grid(column_homogeneous=True,
                          column_spacing=10,
                          row_spacing=10)
         row = 0
         count = 0
-        group =  [x for x in languages if x['Lang'] == i18n.get('locale')][0]['Button']
-       
-       
-        for language in languages:
+        
+        group =chips[0]['Button']
+        for chip in chips:
+            chipName = Gtk.Label(chip['Name'],name ="wifi-label")
+            chipName.set_alignment(0,0.5)
             
-            languageImage = self._gtk.Image(language['Icon'], self._gtk.content_width * .05 , self._gtk.content_height * .05)
-            languageName = Gtk.Label(language['Name'],name ="language-label")
-            language['Button'] = Gtk.RadioButton.new_with_label_from_widget(group,"")
-            if i18n.get('locale') == language['Lang']:
-                 language['Button'] = Gtk.RadioButton.new_with_label_from_widget(None,"")
+            chip['Button'] = Gtk.RadioButton.new_with_label_from_widget(group,"")
+            if chips[0]['Name'] == chip['Name']:
+                 chip['Button'] = Gtk.RadioButton.new_with_label_from_widget(None,"")
            
            
             
-            language['Button'].connect("toggled",self.radioButtonSelected, language['Lang'])
+            chip['Button'].connect("toggled",self.radioButtonSelected, chip['Name'])
+            chip['Button'].set_alignment(1,0.5)
+            chipBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50, name="chip")
+           
+            f = Gtk.Frame(name="chip")
+            chipBox.pack_start(chipName, False, True, 10)
+           
+            chipBox.pack_end(chip['Button'], False, False, 10)
             
-             
-            languageBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
-            f = Gtk.Frame()
-            languageBox.pack_start(languageImage, False, True, 5)
-            languageBox.pack_end(language['Button'], False, False, 5)
-            languageBox.pack_end(languageName, True, True, 5)
-            languageBox.set_size_request(50, 50)
-            f.add(languageBox)
+            f.add(chipBox)
             grid.attach(f, count, row, 1, 1)
             count += 1
             if count % 2 is 0:
@@ -82,47 +86,43 @@ class CoPrintSplashScreenPanel(ScreenPanel):
         gridBox = Gtk.FlowBox()
         gridBox.set_halign(Gtk.Align.CENTER)
         gridBox.add(grid)
-        '''diller bitis'''
+ 
         
+        self.scroll = self._gtk.ScrolledWindow()
+        self.scroll.set_kinetic_scrolling(True)
+        self.scroll.get_overlay_scrolling()
+        self.scroll.set_margin_left(self._gtk.action_bar_width *2.6)
+        self.scroll.set_margin_right(self._gtk.action_bar_width*2.6)
         
+        self.scroll.add(gridBox)
         
         self.continueButton = Gtk.Button(i18n.t('translate.continue'),name ="flat-button-blue")
         self.continueButton.connect("clicked", self.on_click_continue_button)
-        
         self.continueButton.set_hexpand(True)
         self.continueButton.set_margin_left(self._gtk.action_bar_width *4)
-        self.continueButton.set_margin_right(self._gtk.action_bar_width*4 )
+        self.continueButton.set_margin_right(self._gtk.action_bar_width*4)
         buttonBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         buttonBox.pack_start(self.continueButton, False, True, 0)
         buttonBox.set_center_widget(self.continueButton)
-       
+
+        
         main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         main.pack_start(initHeader, True, True, 0)
         main.pack_end(buttonBox, False, True, 50)
-        main.pack_end(gridBox, True, False, 50)
+        main.pack_end(self.scroll, True, True, 50)
         
         self.show_restart_buttons()
       
         self.content.add(main)
         self._screen.base_panel.visible_menu(False)
+        
+    def radioButtonSelected(self, button, baudRate):
+        self.selected = baudRate
        
     def on_click_continue_button(self, continueButton):
-        self._screen.show_panel("co_print_contract_approval", "co_print_contract_approval", None, 2)
+        self._screen.show_panel("co_print_mcu_bootloader_ofset", "co_print_mcu_bootloader_ofset", None, 2)
         
-    def radioButtonSelected(self, button, lang):
-        i18n.set('locale', lang)
-        self._screen._remove_all_panels()
-        #self._screen.reload_panels()
-        self._screen.show_panel("co_print_splash_screen", "co_print_splash_screen", "Language", 2, True)
-
-
-    def _resolve_radio(self, master_radio):
-        active = next((
-        radio for radio in
-        master_radio.get_group()
-        if radio.get_active()
-        ))
-        return active
+   
 
     def update_text(self, text):
         

@@ -71,7 +71,7 @@ class CoPrintSplashScreenPanel(ScreenPanel):
 
     def start_timer(self):
         """ Start the timer. """
-        self.timeout_id = GLib.timeout_add(500, self.on_timeout, None)
+        self.timeout_id = GLib.timeout_add(5, self.on_timeout, None)
         
 
     def on_timeout(self, *args, **kwargs):
@@ -79,7 +79,9 @@ class CoPrintSplashScreenPanel(ScreenPanel):
         Return True to stop it.
         This is not a precise timer since next timeout  
         is recalculated based on the current time.""" 
-        self._screen.show_panel("co_print_language_select_screen", "co_print_language_select_screen", "Language", 1, False)    
+        #self._screen.show_panel("co_print_language_select_screen", "co_print_language_select_screen", "Language", 1, False) 
+        self._screen.show_panel("co_print_printing_screen", "co_print_printing_screen", "Language", 1, False)    
+        
         self.timeout_id = None
         self.destroy()
         return False

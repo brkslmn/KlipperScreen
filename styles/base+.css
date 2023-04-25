@@ -13,87 +13,6 @@ spinner {
     animation: spin 1s ease-in-out infinite;
 }
 
-button.menu {
-    border-bottom: 0em;
-    
-}
-
-label#progress-label {
-    color:#9A9A9A;
-}
-
-button.pause {
-    border-bottom: .2em solid #F7BA17;
-    padding-bottom: .2em;
-    padding-top: .4em;
-    padding-left: .4em;
-    padding-right: .4em;
-    background-color: #161616;
-}
-
-button.close {
-    border-bottom: .2em solid #E74636;
-    padding-bottom: .2em;
-    padding-top: .4em;
-    padding-left: .4em;
-    padding-right: .4em;
-    background-color: #161616;
-}
-
-progressbar#progress-bar-extruder-blue progress{
-    background-image: none;
-    background-color: #00477B;
-    min-height: 1em;
-    border-radius: 15px;
-}
-progressbar#progress-bar-extruder-blue trough {
-    min-height: 1em;
-    border-radius: 15px;
-}
-progressbar#progress-bar-extruder-yellow progress{
-    background-image: none;
-    background-color: #F7BA17;
-    min-height: 1em;
-    border-radius: 15px;
-}
-progressbar#progress-bar-extruder-yellow trough {
-    min-height: 1em;
-    border-radius: 15px;
-}
-
-#extruder-box {
-    background-color: #000000;
-    border-radius: 15px;
-    min-height: 100px;
-}
-
-#menu-buttons {
-    font-size: 30px;
-}
-#menu-buttons:focus {
-    font-size: 30px;
-    border-radius: 0px 0px 40px 40px;
-    background-color: #333333;
-    border: none;
-}
-
-progressbar#progress-bar-print progress{
-    background-image: none;
-    background-color: #00477B;
-    min-height: 1em;
-    border-radius: 15px;
-}
-progressbar#progress-bar-print trough {
-    min-height: 1em;
-    border-radius: 15px;
-}
-
-#progress-label {
-    color: #9A9A9A;
-}
-
-
-
 /*General Button*/
 button#flat-button-blue {
     background-color: #00477B;
@@ -327,29 +246,6 @@ label#wifi-label {
     
 }
 
-#tree-list {
-    background-color: #20292F;
-    font-size: 25px;
-}
-#selected-printer-dimension {
-    font-size: 14px;
-    color: #83848C;
-    font-weight: 500;
-}
-#selected-printer-name{
-    font-size: 19px;
-    color: #FFFFFF;
-    font-weight: 700;
-}
-.thumbnail {
-    background-color: #20292F;
-    border-radius: 10px;
-}
-
-
-
-
-
 
 window {
     background-color: #13181C;
@@ -424,12 +320,6 @@ button.color4 {
     margin: .3em;
     min-height: 3em;
 }
-button.color5 {
-    border-bottom: .4em solid #A7E100;
-    
-}
-
-
 
 button.status {
     background-color: #13181C;
@@ -772,7 +662,7 @@ trough {
 }
 
 .printing-filename {
-    font-size: 1em;
+    font-size: 1.4em;
     font-weight: bold;
     margin: .25em .25em 0 0;
 }
@@ -792,7 +682,6 @@ trough {
 
 .printing-status {
     color: #f0f0f0;
-    font-size: .75em;
     font-style: italic;
     margin: 0 0 0 0;
 }

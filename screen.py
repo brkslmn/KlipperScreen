@@ -885,14 +885,17 @@ class KlipperScreen(Gtk.Window):
                 logging.error("Couldn't get the temperature store size")
 
     def base_panel_show_all(self):
-        self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
+        #self.base_panel.show_macro_shortcut(self._config.get_main_config().getboolean('side_macro_shortcut', True))
         self.base_panel.show_heaters(True)
         self.base_panel.show_estop(True)
 
     def printer_ready(self):
+        #printer açılınca buraya düşüyor
         self.close_popup_message()
-        self.show_panel('main_panel', "main_menu", None, 2, items=self._config.get_menu_items("__main"))
+        self.show_panel('co_print_printing_screen_data', "co_print_printing_screen_data", None, 2, items=self._config.get_menu_items("__main"))
+       
         self.base_panel_show_all()
+        self.base_panel.visible_menu(False) 
 
     def printer_printing(self):
         self.close_screensaver()

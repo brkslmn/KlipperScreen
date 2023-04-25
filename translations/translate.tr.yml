@@ -9,3 +9,41 @@ tr:
   selectLanguage: Lütfen sistem dilini belirleyiniz
   continue: Devam
   mcuArchitecture: MCU Architecture
+  confidentialityAgreementHeader: Gizlilik Sözleşmesi
+  confidentialityAgreementContent: Lütfen sözleşmemizi okuyun ve koşulları onaylayın.
+  accept: Gizlilik sözleşmesini okudum ve kabul ediyorum.
+  selectRegionHeader: Bölge Seçiniz
+  selectRegionContent: Kullandığınız saat dilimini belirlemek için bölgenizi seçiniz.
+  deviceNamingHeader: Cİhaz İsimlendirme
+  deviceNamingContent: Cihazınız için özel bir isim belirleyiniz.
+  selectWifiHeader: Bağlantı Ayarları
+  selectWifiContent: Kullandığınız ağın bilgilerini girerek cihazı bağlayınız.
+  connect: Bağlan
+  connected: Bağlantı Tamamlandı
+  chipSettings: Chip Ayarları
+  chipSettingsSubText: Lütfen kullanacağınız chip’in mimarisini, haberleşme frekansını saat hızını ve modelini seçiniz.
+  enableLowLevelOptions: Ekstra alt düzey yapılandırma seçeneklerini etkinleştirin
+  baudRateSettings: Baud Rate Seçiniz
+  baudRateSettingsSubText: Kullanacağınız işlemci ile haberleşmek için Baud Rate seçiniz.
+  sdCardSettings: SD Kart’a Yazma
+  sdCardSettingsSubText: 3D Yazıcınızın programını değiştirmek için Yazıcınızın SD kartını Co Print Smart’a takınız
+  usbConnected: USB bellek takıldı.
+  usbWaiting: Usb takmanız bekleniyor.
+  printingSettings: 3D Yazıcınızı Bağlayın
+  printingSettingsSubText: USB kablo kullanarak 3D yazıcınızı Co Print Smart’a bağlayınız.
+  searchingPrinting: Yazıcı aranıyor..
+  mcuHeader: Mikrokontroller Seçin
+  mcuContent: Kontrol edeceğiniz kartın üzerinde bulunan mikrokontroller modelini seçiniz.
+  mcuModelHeader: Chip Modelini Seçin
+  mcuModelContent: Kontrol edeceğiniz kartın üzerinde bulunan chip modelini seçiniz.
+  bootloaderOfsetHeader: Bootloader Ofset Seçin
+  bootloaderOfsetContent: Kontrol edeceğiniz kartın üzerinde bulunan chip bootloader ofset'i seçiniz.
+  clockReferenceHeader: Clock Reference Seçin
+  clockReferenceContent: Kontrol edeceğiniz kartın üzerinde bulunan chip clock reference seçiniz.
+  comInterfaceHeader: Com Interface Seçiniz
+  comInterfaceContent: Kontrol edeceğiniz kartın üzerinde bulunan chip com interface seçiniz.
+  usbIdsHeader: USB IDS Seçiniz
+  usbIdsContent: Kontrol edeceğiniz kartın üzerinde bulunan USB IDS seçiniz.
+  usbSerialNumberCHIPID: CHIPID'den USB seri numarası
+  flashChipHeader: Flash Chip Seçiniz
+  flashChipContent: Kontrol edeceğiniz kartın üzerinde bulunan flash chip seçiniz.

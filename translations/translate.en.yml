@@ -9,3 +9,41 @@ en:
   selectLanguage: Please specify system language
   continue: Continue
   mcuArchitecture: MCU Architecture
+  confidentialityAgreementHeader: Confidentiality Agreement
+  confidentialityAgreementContent: Please read our agreement and confirm the terms.
+  accept: I have read and accept the confidentiality agreement.
+  selectRegionHeader: Select Region
+  selectRegionContent: Select your region to determine the time zone you use.
+  deviceNamingHeader: Rename Your Device
+  deviceNamingContent: Set a custom name for your device.
+  selectWifiHeader: Connection Settings
+  selectWifiContent: Connect the device by entering the information of the network you are using.
+  connect: Connect
+  connected: Connection Complete
+  chipSettings: Chip Settings
+  chipSettingsSubText: Please select the architecture, communication frequency, clock speed and model of the chip you will use.
+  enableLowLevelOptions: Enable extra low-level configuration options
+  baudRateSettings: Select Baud Rate
+  baudRateSettingsSubText: Select Baud Rate to communicate with the processor you will use.
+  sdCardSettings: Writing to SD Card
+  sdCardSettingsSubText: Insert your Printer's SD card into Co Print Smart to change the program of your 3D Printer
+  usbConnected: USB memory inserted.
+  usbWaiting: You are expected to plug in USB.
+  printingSettings: Connect Your 3D Printer
+  printingSettingsSubText: Connect your 3D printer to Co Print Smart using a USB cable.
+  searchingPrinting: Searching for printer..
+  mcuHeader: Select The Microcontroller
+  mcuContent: Select the microcontroller model on the board you will control.
+  mcuModelHeader: Select The Chip Model
+  mcuModelContent: Select the chip model on the board you will control.
+  bootloaderOfsetHeader: Select Bootloader Ofset
+  bootloaderOfsetContent: Select the chip bootloader ofset on the board you will control.
+  clockReferenceHeader: Select Clock Reference
+  clockReferenceContent: Select the chip clock reference on the board you will control.
+  comInterfaceHeader: Select Com Interface
+  comInterfaceContent: Select the chip com interface on the board you will control.
+  usbIdsHeader: Select USB IDS
+  usbIdsContent: Select the USB IDS on the board you will control.
+  usbSerialNumberCHIPID: USB serial number from CHIPID
+  flashChipHeader: Select Flash Chip
+  flashChipContent: Select the flash chip on the board you will control.
